@@ -1,0 +1,156 @@
+// google font
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=swap");
+
+/*custom css vars*/
+:root {
+  --container-size: 400px;
+  --clock-size: calc(var(--container-size) * 0.8);
+  --clock-top-color: #00a6ae;
+  --clock-bottom-color: #005187;
+  --hours-hand-color: #2c2b2c;
+  --minutes-hand-color: #e4e3e4;
+  --seconds-hand-color: #f0ffff;
+  --background-color: #006785;
+  --border-width: 12px;
+  --padding-size: 20px;
+}
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  font-family: "Inter", sans-serif;
+  background-color: var(--background-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  height: var(--container-size);
+  width: var(--container-size);
+  border: var(--border-width) solid #f5f4f6;
+  border-radius: 40px;
+  box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.25) inset;
+  position: relative;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.clock {
+  position: relative;
+  height: var(--clock-size);
+  width: var(--clock-size);
+  border-radius: 25px;
+  background-image: linear-gradient(
+    var(--clock-top-color),
+    var(--clock-bottom-color)
+  );
+  box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.25) inset;
+  .indicators {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    .indicator {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+      height: 24px;
+      width: 24px;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 900;
+      color: #ffffff;
+      @for $i from 1 through 12 {
+        &:nth-child(#{$i}) {
+          transform: rotate(#{($i - 1) * (360 / 12)}deg)
+            translateY(calc(var(--clock-size) * 0.45 * -1));
+          span {
+            transform: rotate(#{($i - 1) * (-360 / 12)}deg);
+          }
+        }
+      }
+    }
+  }
+}
+
+.hands {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    height: 10px;
+    width: 10px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    border-radius: 500px;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+    top: 50%;
+    z-index: 4;
+  }
+  &::before {
+    background-color: var(--seconds-hand-color);
+    height: 24px;
+    width: 24px;
+  }
+  &::after {
+    background-color: var(--hours-hand-color);
+    height: 10px;
+    width: 10px;
+  }
+  .hand {
+    position: absolute;
+    left: 0;
+    right: 0;
+    transform-origin: bottom;
+    margin: auto;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+    transition: all cubic-bezier(1, 0.9, 0.37, 0.97) 0.15s;
+    &.hours {
+      --height: calc(var(--clock-size) * 0.35);
+      width: 24px;
+      height: var(--height);
+      background-color: var(--hours-hand-color);
+      border-radius: 20px;
+      top: calc((var(--clock-size) / 2) - var(--height));
+      z-index: 1;
+    }
+    &.minutes {
+      --height: calc(var(--clock-size) * 0.45);
+      z-index: 2;
+      width: 14px;
+      height: var(--height);
+      background-color: var(--minutes-hand-color);
+      border-radius: 20px;
+      top: calc((var(--clock-size) / 2) - var(--height));
+    }
+    &.seconds {
+      --height: calc(var(--clock-size) * 0.45);
+      z-index: 3;
+      width: 4px;
+      height: var(--height);
+      background-color: var(--seconds-hand-color);
+      border-radius: 4px;
+      top: calc((var(--clock-size) / 2) - var(--height));
+    }
+  }
+}
