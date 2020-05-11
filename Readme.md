@@ -9,7 +9,7 @@ Based on the total elapsed milliseconds we are going to generate the angles by w
 by using milliseconds we can rotate the hours and minutes hand too as the seconds progress.
 ```
 
-## 😃 Click here for the 👉 [💥LIVE DEMO]()
+## 😃 Click here for the 👉 [💥LIVE DEMO](https://frontendfunn.github.io/js-clock/)
 
 ---
 
